@@ -1,19 +1,19 @@
-const FStorage = artifacts.require('./FStorage.sol')
+const DStorage = artifacts.require('./DStorage.sol')
 
 require('chai')
   .use(require('chai-as-promised'))
   .should()
 
-contract('FStorage', ([deployer, uploader]) => {
-  let fstorage
+contract('DStorage', ([deployer, uploader]) => {
+  let dstorage
 
   before(async () => {
-    fstorage = await FStorage.deployed()
+    dstorage = await DStorage.deployed()
   })
 
   describe('deployment', async () => {
     it('deploys successfully', async () => {
-      const address = await fstorage.address
+      const address = await dstorage.address
       assert.notEqual(address, 0x0)
       assert.notEqual(address, '')
       assert.notEqual(address, null)
@@ -21,8 +21,8 @@ contract('FStorage', ([deployer, uploader]) => {
     })
 
     it('has a name', async () => {
-      const name = await fstorage.name()
-      assert.equal(name, 'FStorage')
+      const name = await dstorage.name()
+      assert.equal(name, 'DStorage')
     })
   })
 
@@ -35,8 +35,8 @@ contract('FStorage', ([deployer, uploader]) => {
     const fileDescription = 'DescriptionOfTheFile'
 
     before(async () => {
-      result = await fstorage.uploadFile(fileHash, fileSize, fileType, fileName, fileDescription, { from: uploader })
-      fileCount = await fstorage.fileCount()
+      result = await dstorage.uploadFile(fileHash, fileSize, fileType, fileName, fileDescription, { from: uploader })
+      fileCount = await dstorage.fileCount()
     })
 
     //check event
@@ -53,24 +53,24 @@ contract('FStorage', ([deployer, uploader]) => {
       assert.equal(event.uploader, uploader, 'Uploader is correct')
 
       // FAILURE: File must have hash
-      await fstorage.uploadFile('', fileSize, fileType, fileName, fileDescription, { from: uploader }).should.be.rejected;
+      await dstorage.uploadFile('', fileSize, fileType, fileName, fileDescription, { from: uploader }).should.be.rejected;
 
       // FAILURE: File must have size
-      await fstorage.uploadFile(fileHash, '', fileType, fileName, fileDescription, { from: uploader }).should.be.rejected;
+      await dstorage.uploadFile(fileHash, '', fileType, fileName, fileDescription, { from: uploader }).should.be.rejected;
       
       // FAILURE: File must have type
-      await fstorage.uploadFile(fileHash, fileSize, '', fileName, fileDescription, { from: uploader }).should.be.rejected;
+      await dstorage.uploadFile(fileHash, fileSize, '', fileName, fileDescription, { from: uploader }).should.be.rejected;
 
       // FAILURE: File must have name
-      await fstorage.uploadFile(fileHash, fileSize, fileType, '', fileDescription, { from: uploader }).should.be.rejected;
+      await dstorage.uploadFile(fileHash, fileSize, fileType, '', fileDescription, { from: uploader }).should.be.rejected;
 
       // FAILURE: File must have description
-      await fstorage.uploadFile(fileHash, fileSize, fileType, fileName, '', { from: uploader }).should.be.rejected;
+      await dstorage.uploadFile(fileHash, fileSize, fileType, fileName, '', { from: uploader }).should.be.rejected;
     })
 
     //check from Struct
     it('lists file', async () => {
-      const file = await fstorage.files(fileCount)
+      const file = await dstorage.files(fileCount)
       assert.equal(file.fileId.toNumber(), fileCount.toNumber(), 'id is correct')
       assert.equal(file.fileHash, fileHash, 'Hash is correct')
       assert.equal(file.fileSize, fileSize, 'Size is correct')

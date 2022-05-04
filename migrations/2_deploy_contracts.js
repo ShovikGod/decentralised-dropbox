@@ -1,6 +1,6 @@
-const FS = artifacts.require("FStorage");
+const DStorage = artifacts.require("DStorage");
 
 module.exports = function(deployer) {
 	//Deploy Contract
-	deployer.deploy(FS);
+	deployer.deploy(DStorage);
 };
