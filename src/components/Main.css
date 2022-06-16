@@ -1,0 +1,43 @@
+main{
+    max-width: 1024px !important;
+}
+
+.form-card{
+    max-width: 1024px !important;
+    background: #ffe693;
+}
+
+.upload-btn{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.file-name{
+    font-weight: 700;
+    color: #757575;
+    font-size: 0.9rem;
+}
+
+.card{
+    border: 1px solid #969696;
+    transition: box-shadow 0.5s ease;
+}
+
+.card:hover{
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+}
+
+.card-footer button span{
+    font-size: 0.7rem;
+}
+.card-footer a, .card-footer button{
+    border-radius: 0;
+}
+.det{
+    border-bottom-left-radius: 0.1rem !important;
+}
+.down{
+    border-bottom-right-radius: 0.1rem !important;
+}
